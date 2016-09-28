@@ -22,4 +22,5 @@ public enum DaysOfWeek {
     public Integer getDay() {
         return day;
     }
+
 }

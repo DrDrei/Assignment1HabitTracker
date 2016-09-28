@@ -73,4 +73,7 @@ public class Habit {
         return habitList;
     }
 
+    public String toString() {
+        return this.title;
+    }
 }

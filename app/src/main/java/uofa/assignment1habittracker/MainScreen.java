@@ -17,6 +17,7 @@ import java.util.Arrays;
 public class MainScreen extends Activity {
 
     private ListView habitListView;
+    private TextView rowTextView;
     private ArrayList<Habit> habitMainList = new ArrayList<Habit>();
     private ArrayAdapter<Habit> habitArrayAdapter;
 
@@ -26,14 +27,12 @@ public class MainScreen extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
 
-
-
+        rowTextView = (TextView) findViewById(R.id.rowTextView);
         habitListView = (ListView) findViewById(android.R.id.list);
 
         ArrayList<Integer> dow = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5,6,7));
         Habit newHabit = new Habit("test", dow);
         habitMainList.add(newHabit);
-
     }
 
     @Override
