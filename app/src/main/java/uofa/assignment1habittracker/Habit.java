@@ -1,46 +1,93 @@
 package uofa.assignment1habittracker;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
-import java.util.StringTokenizer;
 
 /**
  * Created by drei on 2016-09-26.
  */
 
 public class Habit {
-    private String title;
-    private Map<Integer, Boolean> daysOfWeekCompletion = new HashMap<Integer, Boolean>();
+    private String name;
+    private Map<Integer, Boolean> weeklyCompletionList = new HashMap<Integer, Boolean>();
     private Map<Date, Integer> habitList = new HashMap<Date, Integer>();
-    private void daysOfWeekInit() {
+
+    private void daysOfWeekInitFalse() {
         for (DaysOfWeek day: DaysOfWeek.values()) {
-            daysOfWeekCompletion.put(day.getDay(), false);
+            weeklyCompletionList.put(day.getDay(), false);
         }
     }
 
-    public Habit(String title) {
-        this.title = title;
-        this.daysOfWeekInit();
+    // ==========       Initialization      ==========
+    public Habit(String name) {
+        this.name = name;
+        this.daysOfWeekInitFalse();
     }
 
-    public Habit(String title, ArrayList<Integer> wantedCompletionList) {
-        this.title = title;
-        this.daysOfWeekInit();
-        updateDaysOfWeek(wantedCompletionList);
+    public Habit(String name, ArrayList<DaysOfWeek> wantedCompletionList) {
+        this.name = name;
+        this.daysOfWeekInitFalse();
+        setWeeklyCompletion(wantedCompletionList);
     }
 
-    public void updateDaysOfWeek(ArrayList<Integer> wantedCompletionList) {
-        for (DaysOfWeek day: DaysOfWeek.values()) {
-            if (wantedCompletionList.contains(day.getDay())) {
-                daysOfWeekCompletion.put(day.getDay(), true);
-            } else {
-                daysOfWeekCompletion.put(day.getDay(), false);
-            }
+    // ===============================================
+
+
+    // ==========       Getters/Setters     ==========
+    public void setDayOfWeek(DaysOfWeek day) {
+        weeklyCompletionList.put(day.getDay(), true);
+    }
+
+    public void unsetDayOfWeek(DaysOfWeek day) {
+        weeklyCompletionList.put(day.getDay(), false);
+
+    }
+
+    public void setWeeklyCompletion(ArrayList<DaysOfWeek> wantedCompletionList) {
+        Iterator iter = wantedCompletionList.iterator();
+        daysOfWeekInitFalse();
+        while (iter.hasNext()) {
+            DaysOfWeek day = (DaysOfWeek) iter.next();
+            setDayOfWeek(day);
         }
     }
+
+    public int getCount(Date date) {
+        if (this.habitList.get(date) != null) {
+            return this.habitList.get(date);
+        } else {
+            return 0;
+        }
+
+    }
+
+    public int getDateCount() {
+        return  this.habitList.size();
+    }
+
+    public Iterator getWeeklyCompletionIterator() {
+        return this.weeklyCompletionList.values().iterator();
+    }
+
+    public boolean getWeeklyDay(DaysOfWeek day) {
+        return weeklyCompletionList.get(day.getDay());
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    // ===============================================
+
+
+    // ==========       Helper Funcitons    ==========
 
     public void incrementDayHabit(Date date) {
         if (!habitList.containsKey(date)) {
@@ -61,19 +108,13 @@ public class Habit {
         }
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getTitle(String title) {
-        return this.title;
-    }
-
     public Map<Date, Integer> getHabitList() {
         return habitList;
     }
 
     public String toString() {
-        return this.title;
+        return this.name;
     }
+
+    // ===============================================
 }

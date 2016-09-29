@@ -6,6 +6,7 @@ import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.Window;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -18,6 +19,8 @@ public class MainScreen extends Activity {
 
     private ListView habitListView;
     private TextView rowTextView;
+    private Button incRowButton;
+    private Button decRowButton;
     private ArrayList<Habit> habitMainList = new ArrayList<Habit>();
     private ArrayAdapter<Habit> habitArrayAdapter;
 
@@ -27,10 +30,14 @@ public class MainScreen extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
 
+        incRowButton = (Button) findViewById(R.id.incRowButton);
+        decRowButton = (Button) findViewById(R.id.decRowButton);
         rowTextView = (TextView) findViewById(R.id.rowTextView);
         habitListView = (ListView) findViewById(android.R.id.list);
 
-        ArrayList<Integer> dow = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5,6,7));
+        ArrayList<DaysOfWeek> dow = new ArrayList<DaysOfWeek>();
+        for (DaysOfWeek day: DaysOfWeek.values()) {dow.add(day);}
+
         Habit newHabit = new Habit("test", dow);
         habitMainList.add(newHabit);
     }
