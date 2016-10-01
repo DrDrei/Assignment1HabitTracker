@@ -1,7 +1,10 @@
 package uofa.assignment1habittracker;
 
+import android.widget.DatePicker;
+
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -36,9 +39,9 @@ public class Habit {
         setWeeklyCompletion(wantedCompletionList);
     }
 
-    public Habit(String name, ArrayList<DaysOfWeek> wantedCompletionList, Date date){
+    public Habit(String name, ArrayList<DaysOfWeek> wantedCompletionList, DatePicker datePicker){
         this.name = name;
-        this.startDate = date;
+        this.startDate = getDateFromPicker(datePicker);
         setWeeklyCompletion(wantedCompletionList);
     }
 
@@ -125,6 +128,11 @@ public class Habit {
         return this.name;
     }
 
+    private Date getDateFromPicker(DatePicker datePicker) {
+        Calendar cal = Calendar.getInstance();
+        cal.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
+        return cal.getTime();
+    }
     // ===============================================
 
 }

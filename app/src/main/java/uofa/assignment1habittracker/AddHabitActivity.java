@@ -48,7 +48,7 @@ public class AddHabitActivity extends Activity {
         saveHabitButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (!habitNameText.getText().toString().equals("")) {
-                    newHabit = new Habit(habitNameText.getText().toString(), getWeekArray(), getDate());
+                    newHabit = new Habit(habitNameText.getText().toString(), getWeekArray(), datePicker);
                     HabitSingleton.getInstance().addHabit(newHabit, getApplicationContext());
                     finish();
                 } else {
@@ -106,12 +106,6 @@ public class AddHabitActivity extends Activity {
             dow.add(DaysOfWeek.Sunday);
         }
         return dow;
-    }
-
-    private Date getDate() {
-        Calendar cal = Calendar.getInstance();
-        cal.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
-        return cal.getTime();
     }
 
     private void loadHabitFromIntent() {
