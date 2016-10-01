@@ -12,6 +12,7 @@ import java.util.Map;
 
 public class Habit {
     private String name;
+    private Date startDate;
     private Map<Integer, Boolean> weeklyCompletionList = new HashMap<Integer, Boolean>();
     private Map<Date, Integer> habitList = new HashMap<Date, Integer>();
 
@@ -25,11 +26,18 @@ public class Habit {
     public Habit(String name) {
         this.name = name;
         this.daysOfWeekInitFalse();
+        this.startDate = new Date();
     }
 
     public Habit(String name, ArrayList<DaysOfWeek> wantedCompletionList) {
         this.name = name;
-        this.daysOfWeekInitFalse();
+        this.startDate = new Date();
+        setWeeklyCompletion(wantedCompletionList);
+    }
+
+    public Habit(String name, ArrayList<DaysOfWeek> wantedCompletionList, Date date){
+        this.name = name;
+        this.startDate = date;
         setWeeklyCompletion(wantedCompletionList);
     }
 

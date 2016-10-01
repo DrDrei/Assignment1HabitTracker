@@ -1,96 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:id="@+id/add_habit_view"
+    android:scrollIndicators="right"
+    android:scrollbarAlwaysDrawVerticalTrack="true"
+    android:scrollbars="vertical">
 
-    <EditText
+    <include
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/editText"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:hint="Habit Name" />
+        layout="@layout/header_bar" />
 
-    <TextView
-        android:text="Complete on following days:"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView2"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="10dp" />
+        android:layout_height="match_parent"
+        android:layout_marginBottom="10dp">
 
-    <CheckBox
-        android:text="Monday"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/checkBox"
-        android:layout_weight="0.00"
-        android:layout_marginLeft="15dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-    <CheckBox
-        android:text="Tuesday"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/checkBox7"
-        android:layout_weight="0.00"
-        android:layout_marginLeft="15dp" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/habit_name_editText"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:hint="Habit Name" />
 
-    <CheckBox
-        android:text="Wednesday"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/checkBox6"
-        android:layout_weight="0.00"
-        android:layout_marginLeft="15dp" />
+            <TextView
+                android:text="Complete on following days:"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView2"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="10dp" />
 
-    <CheckBox
-        android:text="Thursday"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/checkBox5"
-        android:layout_weight="0.00"
-        android:layout_marginLeft="15dp" />
+            <CheckBox
+                android:text="Monday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/add_monday"
+                android:layout_weight="0.00"
+                android:layout_marginLeft="15dp" />
 
-    <CheckBox
-        android:text="Friday"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/checkBox4"
-        android:layout_weight="0.00"
-        android:layout_marginLeft="15dp" />
+            <CheckBox
+                android:text="Tuesday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/add_tuesday"
+                android:layout_weight="0.00"
+                android:layout_marginLeft="15dp" />
 
-    <CheckBox
-        android:text="Saturday"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/checkBox3"
-        android:layout_weight="0.00"
-        android:layout_marginLeft="15dp" />
+            <CheckBox
+                android:text="Wednesday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/add_wednesday"
+                android:layout_weight="0.00"
+                android:layout_marginLeft="15dp" />
 
-    <CheckBox
-        android:text="Sunday"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/checkBox2"
-        android:layout_weight="0.00"
-        android:layout_marginLeft="15dp" />
+            <CheckBox
+                android:text="Thursday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/add_thursday"
+                android:layout_weight="0.00"
+                android:layout_marginLeft="15dp" />
 
-    <TextView
-        android:text="Start date:"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView4"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="15dp" />
+            <CheckBox
+                android:text="Friday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/add_friday"
+                android:layout_weight="0.00"
+                android:layout_marginLeft="15dp" />
 
-    <DatePicker
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/datePicker"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp" />
+            <CheckBox
+                android:text="Saturday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/add_saturday"
+                android:layout_weight="0.00"
+                android:layout_marginLeft="15dp" />
+
+            <CheckBox
+                android:text="Sunday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/add_sunday"
+                android:layout_weight="0.00"
+                android:layout_marginLeft="15dp" />
+
+            <TextView
+                android:text="Start date:"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView4"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp" />
+
+            <DatePicker
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/habit_date_picker"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp" />
+
+            <Button
+                android:text="Delete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/delete_habit_button"
+                android:textColorLink="@android:color/holo_red_light"
+                android:visibility="gone"
+                android:layout_marginBottom="15dp" />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
