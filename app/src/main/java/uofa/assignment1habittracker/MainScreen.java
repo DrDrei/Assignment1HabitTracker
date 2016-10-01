@@ -22,7 +22,6 @@ public class MainScreen extends Activity {
     private Button decRowButton;
 
     private Button addHabitButton;
-//    private ArrayList<Habit> habitMainList = new ArrayList<Habit>();
     private ArrayAdapter<Habit> habitArrayAdapter;
 
 
@@ -30,14 +29,14 @@ public class MainScreen extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
-
         incRowButton = (Button) findViewById(R.id.incRowButton);
         decRowButton = (Button) findViewById(R.id.decRowButton);
         rowTextView = (TextView) findViewById(R.id.rowTextView);
-
         habitListView = (ListView) findViewById(android.R.id.list);
 
+
         configureHeader();
+        HabitSingleton.getInstance().loadHabits(getApplicationContext());
 
         addHabitButton.setOnClickListener(new View.OnClickListener() {
 
@@ -50,7 +49,6 @@ public class MainScreen extends Activity {
         habitListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Habit habit = (Habit) habitListView.getItemAtPosition(position);
                 Intent intent = new Intent(getApplicationContext(), AddHabitActivity.class);
                 intent.putExtra("habit_index", position);
                 startActivityForResult(intent, 0);

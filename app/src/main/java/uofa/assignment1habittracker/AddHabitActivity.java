@@ -10,6 +10,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -29,7 +32,7 @@ public class AddHabitActivity extends Activity {
     private Habit newHabit;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_habit_view);
 
@@ -47,6 +50,7 @@ public class AddHabitActivity extends Activity {
                 if (!habitNameText.getText().toString().equals("")) {
                     newHabit = new Habit(habitNameText.getText().toString(), getWeekArray(), getDate());
                     HabitSingleton.getInstance().addHabit(newHabit);
+                    HabitSingleton.getInstance().saveHabits(getApplicationContext());
                     finish();
                 } else {
                     habitNameText.setError("Give the habit a name.");
@@ -57,6 +61,7 @@ public class AddHabitActivity extends Activity {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 HabitSingleton.getInstance().removeHabit(newHabit);
+                HabitSingleton.getInstance().saveHabits(getApplicationContext());
                 finish();
             }
         });

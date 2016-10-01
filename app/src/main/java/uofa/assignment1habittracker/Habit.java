@@ -1,5 +1,6 @@
 package uofa.assignment1habittracker;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -125,4 +126,5 @@ public class Habit {
     }
 
     // ===============================================
+
 }
