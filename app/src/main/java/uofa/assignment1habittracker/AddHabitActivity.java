@@ -43,14 +43,13 @@ public class AddHabitActivity extends Activity {
         datePicker = (DatePicker) findViewById(R.id.habit_date_picker);
         habitNameText = (EditText) findViewById(R.id.habit_name_editText);
 
-        getSerializedHabit();
+        loadHabitFromIntent();
 
         saveHabitButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (!habitNameText.getText().toString().equals("")) {
                     newHabit = new Habit(habitNameText.getText().toString(), getWeekArray(), getDate());
-                    HabitSingleton.getInstance().addHabit(newHabit);
-                    HabitSingleton.getInstance().saveHabits(getApplicationContext());
+                    HabitSingleton.getInstance().addHabit(newHabit, getApplicationContext());
                     finish();
                 } else {
                     habitNameText.setError("Give the habit a name.");
@@ -60,8 +59,7 @@ public class AddHabitActivity extends Activity {
 
         deleteButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                HabitSingleton.getInstance().removeHabit(newHabit);
-                HabitSingleton.getInstance().saveHabits(getApplicationContext());
+                HabitSingleton.getInstance().removeHabit(newHabit, getApplicationContext());
                 finish();
             }
         });
@@ -116,7 +114,7 @@ public class AddHabitActivity extends Activity {
         return cal.getTime();
     }
 
-    private void getSerializedHabit() {
+    private void loadHabitFromIntent() {
         Intent intent = getIntent();
         if (intent.hasExtra("habit_index")) {
             habitNameText = (EditText) findViewById(R.id.habit_name_editText);

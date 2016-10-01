@@ -36,12 +36,14 @@ public class HabitSingleton {
 
     private HabitSingleton() {}
 
-    public void addHabit(Habit habit) {
+    public void addHabit(Habit habit, Context context) {
         this.habitList.add(habit);
+        saveHabits(context);
     }
 
-    public void removeHabit(Habit habit) {
+    public void removeHabit(Habit habit, Context context) {
         this.habitList.remove(habit);
+        saveHabits(context);
     }
 
     public ArrayList<Habit> getHabitList() {
@@ -85,9 +87,5 @@ public class HabitSingleton {
             // TODO Auto-generated catch block
             throw new RuntimeException();
         }
-    }
-
-    public String getFILENAME() {
-        return this.FILENAME;
     }
 }
