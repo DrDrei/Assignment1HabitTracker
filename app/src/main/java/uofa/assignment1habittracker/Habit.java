@@ -2,7 +2,6 @@ package uofa.assignment1habittracker;
 
 import android.widget.DatePicker;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -10,9 +9,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-/**
- * Created by drei on 2016-09-26.
- */
 
 public class Habit {
     private String name;

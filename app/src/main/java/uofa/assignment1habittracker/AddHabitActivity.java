@@ -9,17 +9,10 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 
 public class AddHabitActivity extends Activity {
-
 
     private CheckBox checkMon, checkTue, checkWed, checkThu, checkFri, checkSat, checkSun;
     private DatePicker datePicker;
