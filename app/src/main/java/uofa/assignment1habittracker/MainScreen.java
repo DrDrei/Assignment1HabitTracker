@@ -23,8 +23,6 @@ public class MainScreen extends Activity {
 
     private Button addHabitButton;
     private ArrayAdapter<Habit> habitArrayAdapter;
-//    private CustomListViewAdapter customListViewAdapter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,20 +36,6 @@ public class MainScreen extends Activity {
 
         configureHeader();
         HabitSingleton.getInstance().loadHabits(getApplicationContext());
-
-//        customListViewAdapter = new CustomListViewAdapter(this);
-//        for (DaysOfWeek day: DaysOfWeek.values()) {
-//            Iterator iterator = HabitSingleton.getInstance().getHabitList().iterator();
-//            customListViewAdapter.addSectionHeader(day.name());
-//            while (iterator.hasNext()) {
-//                Habit currentHabit = (Habit) iterator.next();
-//                if (currentHabit.getWeeklyDay(day)) {
-//                    customListViewAdapter.addHabit(currentHabit);
-//                }
-//            }
-//        }
-
-
 
         addHabitButton.setOnClickListener(new View.OnClickListener() {
 
@@ -76,7 +60,6 @@ public class MainScreen extends Activity {
         super.onStart();
         habitArrayAdapter = new ArrayAdapter<Habit>(this, R.layout.list_textview, HabitSingleton.getInstance().getHabitList());
         habitListView.setAdapter(habitArrayAdapter);
-//        habitListView.setAdapter(customListViewAdapter);
     }
 
     public void configureHeader() {
