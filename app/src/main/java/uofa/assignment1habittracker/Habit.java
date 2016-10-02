@@ -129,6 +129,10 @@ public class Habit {
         cal.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
         return cal.getTime();
     }
+
+    public String getTotalCount() {
+        return Integer.toString(10);
+    }
     // ===============================================
 
 }
