@@ -10,8 +10,6 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.Iterator;
-
 
 public class MainScreen extends Activity {
 
@@ -25,7 +23,7 @@ public class MainScreen extends Activity {
 
     private Button addHabitButton;
     private ArrayAdapter<Habit> habitArrayAdapter;
-    private CustomListViewAdapter customListViewAdapter;
+//    private CustomListViewAdapter customListViewAdapter;
 
 
     @Override
@@ -41,17 +39,17 @@ public class MainScreen extends Activity {
         configureHeader();
         HabitSingleton.getInstance().loadHabits(getApplicationContext());
 
-        customListViewAdapter = new CustomListViewAdapter(this);
-        for (DaysOfWeek day: DaysOfWeek.values()) {
-            Iterator iterator = HabitSingleton.getInstance().getHabitList().iterator();
-            customListViewAdapter.addSectionHeader(day.name());
-            while (iterator.hasNext()) {
-                Habit currentHabit = (Habit) iterator.next();
-                if (currentHabit.getWeeklyDay(day)) {
-                    customListViewAdapter.addHabit(currentHabit);
-                }
-            }
-        }
+//        customListViewAdapter = new CustomListViewAdapter(this);
+//        for (DaysOfWeek day: DaysOfWeek.values()) {
+//            Iterator iterator = HabitSingleton.getInstance().getHabitList().iterator();
+//            customListViewAdapter.addSectionHeader(day.name());
+//            while (iterator.hasNext()) {
+//                Habit currentHabit = (Habit) iterator.next();
+//                if (currentHabit.getWeeklyDay(day)) {
+//                    customListViewAdapter.addHabit(currentHabit);
+//                }
+//            }
+//        }
 
 
 
@@ -76,9 +74,9 @@ public class MainScreen extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
-//        habitArrayAdapter = new ArrayAdapter<Habit>(this, R.layout.list_textview, HabitSingleton.getInstance().getHabitList());
-//        habitListView.setAdapter(habitArrayAdapter);
-        habitListView.setAdapter(customListViewAdapter);
+        habitArrayAdapter = new ArrayAdapter<Habit>(this, R.layout.list_textview, HabitSingleton.getInstance().getHabitList());
+        habitListView.setAdapter(habitArrayAdapter);
+//        habitListView.setAdapter(customListViewAdapter);
     }
 
     public void configureHeader() {
