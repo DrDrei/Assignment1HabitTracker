@@ -80,8 +80,8 @@ public class Habit {
         return this.weeklyCompletionList.values().iterator();
     }
 
-    public boolean getWeeklyDay(DaysOfWeek day) {
-        return weeklyCompletionList.get(day.getDay());
+    public boolean getWeeklyDay(Integer day) {
+        return weeklyCompletionList.get(day);
     }
 
     public void setName(String name) {
@@ -91,6 +91,17 @@ public class Habit {
     public String getName() {
         return this.name;
     }
+
+    public void updateHabit(String name, ArrayList<DaysOfWeek> wantedCompletionList, DatePicker datePicker) {
+        this.name = name;
+        this.startDate = getDateFromPicker(datePicker);
+        setWeeklyCompletion(wantedCompletionList);
+    }
+
+    public Date getStartDate() {
+        return this.startDate;
+    }
+
 
     // ===============================================
 
@@ -127,6 +138,7 @@ public class Habit {
     private Date getDateFromPicker(DatePicker datePicker) {
         Calendar cal = Calendar.getInstance();
         cal.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
+        cal.get(Calendar.DAY_OF_WEEK);
         return cal.getTime();
     }
     // ===============================================

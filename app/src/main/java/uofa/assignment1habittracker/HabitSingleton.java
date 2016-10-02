@@ -13,8 +13,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Iterator;
 
 /**
  * Created by drei on 2016-09-30.
@@ -48,6 +52,28 @@ public class HabitSingleton {
 
     public ArrayList<Habit> getHabitList() {
         return this.habitList;
+    }
+
+    public ArrayList<Habit> getHabitListOnDay(Integer day) {
+        ArrayList<Habit> dayHabitList = new ArrayList<Habit>();
+        Iterator iter = habitList.iterator();
+        while (iter.hasNext()) {
+            Habit habit = (Habit) iter.next();
+            if (habit.getWeeklyDay(day)) {
+                dayHabitList.add(habit);
+            }
+        }
+        return dayHabitList;
+    }
+
+    public ArrayList<Habit> getTodaysHabits() {
+        Calendar cal = Calendar.getInstance();
+        int today = cal.getInstance().get(Calendar.DAY_OF_WEEK);
+        return getHabitListOnDay(today);
+    }
+
+    public Habit getTodaysHabitAtIndex(int position) {
+        return getTodaysHabits().get(position);
     }
 
     public Habit getHabitAtIndex(int position) {
@@ -88,4 +114,6 @@ public class HabitSingleton {
             throw new RuntimeException();
         }
     }
+
+
 }

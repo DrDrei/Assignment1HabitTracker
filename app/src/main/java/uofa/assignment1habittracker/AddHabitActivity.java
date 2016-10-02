@@ -10,6 +10,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 
 public class AddHabitActivity extends Activity {
@@ -40,9 +41,12 @@ public class AddHabitActivity extends Activity {
 
         saveHabitButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (!habitNameText.getText().toString().equals("")) {
+                if (!habitNameText.getText().toString().equals("") && (newHabit == null)) {
                     newHabit = new Habit(habitNameText.getText().toString(), getWeekArray(), datePicker);
                     HabitSingleton.getInstance().addHabit(newHabit, getApplicationContext());
+                    finish();
+                } else if (!habitNameText.getText().toString().equals("")) {
+                    newHabit.updateHabit(habitNameText.getText().toString(), getWeekArray(), datePicker);
                     finish();
                 } else {
                     habitNameText.setError("Give the habit a name.");
@@ -83,19 +87,25 @@ public class AddHabitActivity extends Activity {
 
     private ArrayList<DaysOfWeek> getWeekArray() {
         ArrayList<DaysOfWeek> dow = new ArrayList<>();
-        if (checkMon.isActivated()) {
+        if (checkMon.isChecked()) {
             dow.add(DaysOfWeek.Monday);
-        } else if (checkTue.isActivated()) {
+        }
+        if (checkTue.isChecked()) {
             dow.add(DaysOfWeek.Tuesday);
-        } else if (checkWed.isActivated()) {
+        }
+        if (checkWed.isChecked()) {
             dow.add(DaysOfWeek.Wednesday);
-        } else if (checkThu.isActivated()) {
+        }
+        if (checkThu.isChecked()) {
             dow.add(DaysOfWeek.Thursday);
-        } else if (checkFri.isActivated()) {
+        }
+        if (checkFri.isChecked()) {
             dow.add(DaysOfWeek.Friday);
-        } else if (checkSat.isActivated()) {
+        }
+        if (checkSat.isChecked()) {
             dow.add(DaysOfWeek.Saturday);
-        } else if (checkSun.isActivated()) {
+        }
+        if (checkSun.isChecked()) {
             dow.add(DaysOfWeek.Sunday);
         }
         return dow;
@@ -106,10 +116,23 @@ public class AddHabitActivity extends Activity {
         if (intent.hasExtra("habit_index")) {
             habitNameText = (EditText) findViewById(R.id.habit_name_editText);
             int position = (int) intent.getSerializableExtra("habit_index");
-            newHabit = HabitSingleton.getInstance().getHabitAtIndex(position);
+            newHabit = HabitSingleton.getInstance().getTodaysHabitAtIndex(position);
             habitNameText.setText(newHabit.getName());
             deleteButton.setVisibility(View.VISIBLE);
-            // do something else
+            // load date load checkboxes.
+
+            checkSun.setChecked(newHabit.getWeeklyDay(DaysOfWeek.Sunday.getDay()));
+            checkMon.setChecked(newHabit.getWeeklyDay(DaysOfWeek.Monday.getDay()));
+            checkTue.setChecked(newHabit.getWeeklyDay(DaysOfWeek.Tuesday.getDay()));
+            checkWed.setChecked(newHabit.getWeeklyDay(DaysOfWeek.Wednesday.getDay()));
+            checkThu.setChecked(newHabit.getWeeklyDay(DaysOfWeek.Thursday.getDay()));
+            checkFri.setChecked(newHabit.getWeeklyDay(DaysOfWeek.Friday.getDay()));
+            checkSat.setChecked(newHabit.getWeeklyDay(DaysOfWeek.Saturday.getDay()));
+
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(newHabit.getStartDate());
+
+            datePicker.updateDate(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH));
         }
     }
 

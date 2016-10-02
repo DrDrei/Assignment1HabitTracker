@@ -10,13 +10,14 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.Calendar;
+
 
 public class MainScreen extends Activity {
 
     private ListView habitListView;
 
     private TextView headerTitleText;
-
 
     private Button addHabitButton;
     private ArrayAdapter<Habit> habitArrayAdapter;
@@ -51,7 +52,7 @@ public class MainScreen extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
-        habitArrayAdapter = new ArrayAdapter<Habit>(this, R.layout.list_textview, HabitSingleton.getInstance().getHabitList());
+        habitArrayAdapter = new ArrayAdapter<Habit>(this, R.layout.list_textview, HabitSingleton.getInstance().getTodaysHabits());
         habitListView.setAdapter(habitArrayAdapter);
     }
 
