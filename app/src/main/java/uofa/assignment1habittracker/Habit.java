@@ -102,6 +102,15 @@ public class Habit {
         return this.startDate;
     }
 
+    public int getTodaysCount() {
+        Calendar cal = Calendar.getInstance();
+        int today = cal.getInstance().get(Calendar.DAY_OF_WEEK);
+        if (habitList.containsKey(today)) {
+            return habitList.get(today);
+        } else  {
+            return 0;
+        }
+    }
 
     // ===============================================
 
@@ -141,6 +150,7 @@ public class Habit {
         cal.get(Calendar.DAY_OF_WEEK);
         return cal.getTime();
     }
+
     // ===============================================
 
 }
