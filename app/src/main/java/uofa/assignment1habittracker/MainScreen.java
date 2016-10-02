@@ -37,44 +37,55 @@ public class MainScreen extends Activity {
     public final static String ITEM_TITLE = "title";
     public final static String ITEM_CAPTION = "caption";
 
-    public Map<String,?> createItem(String title, String caption) {
+    public Map<String,?> createItem(Habit habit) {
         Map<String,String> item = new HashMap<String,String>();
-        item.put(ITEM_TITLE, title);
-        item.put(ITEM_CAPTION, caption);
+        item.put(ITEM_TITLE, habit.getName());
+        item.put(ITEM_CAPTION, habit.getTotalCount());
         return item;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main_screen);
-//        incRowButton = (Button) findViewById(R.id.incRowButton);
-//        decRowButton = (Button) findViewById(R.id.decRowButton);
-//        rowTextView = (TextView) findViewById(R.id.rowTextView);
-//        habitListView = (ListView) findViewById(android.R.id.list);
-
-
-//        configureHeader();
         HabitSingleton.getInstance().loadHabits(getApplicationContext());
 
 
-        ////////////////////////////////
-        List<Map<String,?>> security = new LinkedList<Map<String,?>>();
-        security.add(createItem("Remember passwords", "Save usernames and passwords for Web sites"));
-        security.add(createItem("Clear passwords", "Save usernames and passwords for Web sites"));
-        security.add(createItem("Show security warnings", "Show warning if there is a problem with a site's security"));
+        List<Map<String,Habit>> security = new LinkedList<Map<String,Habit>>();
+
+//        security.add(createItem(HabitSingleton.getInstance().getHabitList().get(0)));
+//        security.add(createItem("Clear passwords", "Save usernames and passwords for Web sites"));
+//        security.add(createItem("Show security warnings", "Show warning if there is a problem with a site's security"));
 
         // create our list and custom adapter
         SeparatedListAdapter adapter = new SeparatedListAdapter(this);
-        adapter.addSection("Array test", new ArrayAdapter<String>(this,
-                R.layout.list_item, new String[] { "First item", "Item two" }));
-        adapter.addSection("Security", new SimpleAdapter(this, security, R.layout.list_complex,
-                new String[] { ITEM_TITLE, ITEM_CAPTION }, new int[] { R.id.list_complex_title, R.id.list_complex_caption }));
+
+        adapter.addSection("Today", new ArrayAdapter<Habit>(this,
+                R.layout.list_item, HabitSingleton.getInstance().getHabitList()));
+
+        adapter.addSection("Tomorrow", new ArrayAdapter<Habit>(this,
+                R.layout.list_item, HabitSingleton.getInstance().getHabitList()));
+
+
+//        new SimpleAdapter()
+
+
+
+//        adapter.addSection("Testing Section", new SimpleAdapter(this, security, R.layout.list_complex,
+//                new String[] { ITEM_TITLE, ITEM_CAPTION }, new int[] { R.id.list_complex_title, R.id.list_complex_caption }));
 
         ListView list = new ListView(this);
         list.setAdapter(adapter);
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(), AddHabitActivity.class);
+//                intent.putExtra("habit_index", position);
+                startActivityForResult(intent, 0);
+            }
+        });
+
         this.setContentView(list);
-        /////////////////////////////////////////////
 
 
 
@@ -99,9 +110,6 @@ public class MainScreen extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
-//        habitArrayAdapter = new ArrayAdapter<Habit>(this, R.layout.list_textview, HabitSingleton.getInstance().getHabitList());
-//        habitListView.setAdapter(habitArrayAdapter);
-//        habitListView.setAdapter(customListViewAdapter);
     }
 
 //    public void configureHeader() {
