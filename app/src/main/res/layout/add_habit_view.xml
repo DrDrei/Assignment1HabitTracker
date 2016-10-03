@@ -24,6 +24,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
+            <Button
+                android:text="View Habit Completions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/inspect_habit_button"
+                android:visibility="gone" />
+
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -112,13 +119,6 @@
                 android:id="@+id/habit_date_picker"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp" />
-
-            <Button
-                android:text="View Habit Completions"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/inspect_habit_button"
-                android:visibility="gone" />
 
             <Button
                 android:text="Delete"

@@ -122,6 +122,7 @@ public class Habit implements Serializable {
         }
     }
 
+
     // ===============================================
 
 
@@ -153,7 +154,7 @@ public class Habit implements Serializable {
         decrementDayHabit(getToday());
     }
 
-    public Map<String, Integer> getHabitList() {
+    public Map<String, Integer> getCompletionMap() {
         return habitList;
     }
 
