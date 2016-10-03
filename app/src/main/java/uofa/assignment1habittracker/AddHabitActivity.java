@@ -22,6 +22,7 @@ public class AddHabitActivity extends Activity {
 
     private Button saveHabitButton;
     private Button deleteButton;
+    private Button inspectHabitButton;
 
     private Habit newHabit;
 
@@ -32,6 +33,7 @@ public class AddHabitActivity extends Activity {
 
         this.configureHeader();
         deleteButton = (Button) findViewById(R.id.delete_habit_button);
+        inspectHabitButton = (Button) findViewById(R.id.inspect_habit_button);
 
         this.initializeCheckboxes();
         datePicker = (DatePicker) findViewById(R.id.habit_date_picker);
@@ -58,6 +60,13 @@ public class AddHabitActivity extends Activity {
             public void onClick(View v) {
                 HabitSingleton.getInstance().removeHabit(newHabit, getApplicationContext());
                 finish();
+            }
+        });
+
+        inspectHabitButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), InspectHabitView.class);
+                startActivityForResult(intent, 0);
             }
         });
     }
@@ -119,8 +128,9 @@ public class AddHabitActivity extends Activity {
             newHabit = HabitSingleton.getInstance().getTodaysHabitAtIndex(position);
             habitNameText.setText(newHabit.getName());
             deleteButton.setVisibility(View.VISIBLE);
-            // load date load checkboxes.
+            inspectHabitButton.setVisibility(View.VISIBLE);
 
+            // load date load checkboxes.
             checkSun.setChecked(newHabit.getWeeklyDay(DaysOfWeek.Sunday.getDay()));
             checkMon.setChecked(newHabit.getWeeklyDay(DaysOfWeek.Monday.getDay()));
             checkTue.setChecked(newHabit.getWeeklyDay(DaysOfWeek.Tuesday.getDay()));
