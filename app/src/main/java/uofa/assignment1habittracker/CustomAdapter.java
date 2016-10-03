@@ -27,11 +27,11 @@ public class CustomAdapter extends ArrayAdapter<Habit> {
     private Context context;
     private ArrayList<Habit> habits;
 
-    public CustomAdapter(Context context, int resource) {
+    public CustomAdapter(Context context, int resource, ArrayList<Habit> habits) {
         super(context, resource);
         this.context = context;
         this.layoutResourceId = resource;
-        habits = HabitSingleton.getInstance().getTodaysHabits();
+        this.habits = habits;
     }
 
     @Override
@@ -42,7 +42,7 @@ public class CustomAdapter extends ArrayAdapter<Habit> {
         row = inflater.inflate(layoutResourceId, parent, false);
 
         HabitItemHolder holder = new HabitItemHolder();
-        holder.habit = HabitSingleton.getInstance().getTodaysHabits().get(position);
+        holder.habit = this.habits.get(position);
         holder.titleText = (TextView) row.findViewById(R.id.main_title);
         holder.captionText = (TextView) row.findViewById(R.id.caption_text);
         holder.incButton = (Button) row.findViewById(R.id.increment_list_button);
@@ -51,7 +51,7 @@ public class CustomAdapter extends ArrayAdapter<Habit> {
         holder.incButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HabitSingleton.getInstance().getTodaysHabits().get(position).incrementTodaysHabit();
+                habits.get(position).incrementTodaysHabit();
                 HabitSingleton.getInstance().saveHabits();
                 notifyDataSetChanged();
             }
@@ -60,7 +60,7 @@ public class CustomAdapter extends ArrayAdapter<Habit> {
         holder.decButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HabitSingleton.getInstance().getTodaysHabits().get(position).decrementTodaysHabit();
+                habits.get(position).decrementTodaysHabit();
                 HabitSingleton.getInstance().saveHabits();
                 notifyDataSetChanged();
             }
@@ -76,17 +76,11 @@ public class CustomAdapter extends ArrayAdapter<Habit> {
         holder.captionText.setText("Todays Completions:" + holder.habit.getTodaysCount());
     }
 
-//    @Override
-//    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//        Log.v("tag", "Item clicked.");
-//    }
-
     public static class HabitItemHolder {
         Habit       habit;
         TextView    titleText;
         TextView    captionText;
         Button      incButton;
         Button      decButton;
-
     }
 }

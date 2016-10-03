@@ -17,7 +17,10 @@
         </activity>
         <activity
             android:name=".AddHabitActivity"
-            android:label="@string/title_activity_add_habit"></activity>
+            android:label="@string/title_activity_add_habit" />
+        <activity
+            android:name=".ViewAllHabits"
+            android:label="@string/title_activity_view_all_habits"></activity>
     </application>
 
 </manifest>
