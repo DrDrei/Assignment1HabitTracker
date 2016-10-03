@@ -29,6 +29,7 @@ public class MainScreen extends Activity {
         customHabitListView = (ListView) findViewById(android.R.id.list);
 
         configureHeader();
+        HabitSingleton.getInstance().setMainContext(getApplicationContext());
         HabitSingleton.getInstance().loadHabits(getApplicationContext());
 
         addHabitButton.setOnClickListener(new View.OnClickListener() {

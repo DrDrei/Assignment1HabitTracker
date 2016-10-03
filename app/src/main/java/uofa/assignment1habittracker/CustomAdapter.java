@@ -52,8 +52,7 @@ public class CustomAdapter extends ArrayAdapter<Habit> {
             @Override
             public void onClick(View v) {
                 HabitSingleton.getInstance().getTodaysHabits().get(position).incrementTodaysHabit();
-                Habit habit = HabitSingleton.getInstance().getTodaysHabits().get(position);
-                String number = habit.getTodaysCount();
+                HabitSingleton.getInstance().saveHabits();
                 notifyDataSetChanged();
             }
         });
@@ -62,6 +61,7 @@ public class CustomAdapter extends ArrayAdapter<Habit> {
             @Override
             public void onClick(View v) {
                 HabitSingleton.getInstance().getTodaysHabits().get(position).decrementTodaysHabit();
+                HabitSingleton.getInstance().saveHabits();
                 notifyDataSetChanged();
             }
         });

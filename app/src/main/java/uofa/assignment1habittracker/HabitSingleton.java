@@ -33,6 +33,7 @@ import java.util.Iterator;
 public class HabitSingleton {
     private static String FILENAME = "habits.sav";
     private static HabitSingleton ourInstance = new HabitSingleton();
+    private Context mainContext;
     private ArrayList<Habit> habitList = new ArrayList<Habit>();
     public static HabitSingleton getInstance() {
         return ourInstance;
@@ -48,6 +49,16 @@ public class HabitSingleton {
     public void removeHabit(Habit habit, Context context) {
         this.habitList.remove(habit);
         saveHabits(context);
+    }
+
+    public void setMainContext(Context context) {
+        this.mainContext = context;
+    }
+
+    public void saveHabits(){
+        if (mainContext != null) {
+            this.saveHabits(mainContext);
+        }
     }
 
     public ArrayList<Habit> getHabitList() {
