@@ -1,5 +1,3 @@
 # usenka-HabitTracker
 
-movie is located in the repo root @ https://github.com/DrDrei/usenka-HabitTracker/blob/master/AppVideo.mov
-
-https://archive.org/details/AppVideo_201610 ??
+https://ia801507.us.archive.org/23/items/AppVideo_201610/AppVideo.mp4
