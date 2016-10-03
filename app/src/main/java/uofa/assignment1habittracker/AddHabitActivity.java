@@ -66,6 +66,7 @@ public class AddHabitActivity extends Activity {
         inspectHabitButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), InspectHabitView.class);
+                HabitSingleton.getInstance().setCurrentHabit(newHabit);
                 startActivityForResult(intent, 0);
             }
         });

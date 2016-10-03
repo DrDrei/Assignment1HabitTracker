@@ -4,6 +4,7 @@ import android.text.format.DateUtils;
 import android.widget.DatePicker;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,6 +14,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Objects;
 
 
 public class Habit implements Serializable {
@@ -20,6 +22,7 @@ public class Habit implements Serializable {
     private String startDate;
     private Map<Integer, Boolean> weeklyCompletionList = new HashMap<Integer, Boolean>();
     private Map<String, Integer> habitList = new HashMap<String, Integer>();
+    private ArrayList<Completion> completions = new ArrayList<Completion>();
 
     private void daysOfWeekInitFalse() {
         for (DaysOfWeek day: DaysOfWeek.values()) {
@@ -122,6 +125,25 @@ public class Habit implements Serializable {
         }
     }
 
+    private void updateCompletionList() {
+        this.completions.clear();
+        Iterator iter = habitList.keySet().iterator();
+        while (iter.hasNext()) {
+            String dateString = (String) iter.next();
+            Integer completions = habitList.get(dateString);
+            Completion completion = new Completion(dateString, completions);
+            this.completions.add(completion);
+        }
+    }
+
+    public void setCompletions(Integer completions) {
+
+    }
+
+    public void overwriteCompletionList(ArrayList<Completion> completions) {
+        this.completions = completions;
+    }
+
 
     // ===============================================
 
@@ -134,6 +156,7 @@ public class Habit implements Serializable {
         } else {
             habitList.put(date, habitList.get(date) + 1);
         }
+        this.updateCompletionList();
     }
 
     public void incrementTodaysHabit() {
@@ -148,14 +171,15 @@ public class Habit implements Serializable {
                 habitList.put(date, habitList.get(date) - 1);
             }
         }
+        this.updateCompletionList();
     }
 
     public void decrementTodaysHabit() {
         decrementDayHabit(getToday());
     }
 
-    public Map<String, Integer> getCompletionMap() {
-        return habitList;
+    public ArrayList<Completion> getCompletionList() {
+        return completions;
     }
 
     public String toString() {
