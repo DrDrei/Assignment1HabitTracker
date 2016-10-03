@@ -35,6 +35,7 @@ public class HabitSingleton {
     private static HabitSingleton ourInstance = new HabitSingleton();
     private Context mainContext;
     private ArrayList<Habit> habitList = new ArrayList<Habit>();
+    private Habit currentHabit;
     public static HabitSingleton getInstance() {
         return ourInstance;
     }
@@ -125,6 +126,20 @@ public class HabitSingleton {
             // TODO Auto-generated catch block
             throw new RuntimeException();
         }
+    }
+
+    public void setCurrentHabit(Habit habit) {
+        this.currentHabit = habit;
+    }
+    public Habit getCurrentHabit() {
+        return this.currentHabit;
+    }
+
+    public void updateCompletions(ArrayList<Completion> completions) {
+        currentHabit.overwriteCompletionList(completions);
+        int pos = habitList.indexOf(currentHabit);
+        habitList.set(pos, currentHabit);
+        saveHabits();
     }
 
 

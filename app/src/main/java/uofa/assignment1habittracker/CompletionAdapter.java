@@ -19,17 +19,16 @@ import java.util.ArrayList;
 /*
 https://looksok.wordpress.com/tag/listview-item-with-button/
  */
-public class CompletionAdapter extends ArrayAdapter<Habit> {
+public class CompletionAdapter extends ArrayAdapter<Completion> {
     private int layoutResourceId;
     private Context context;
-    private ArrayList<Habit> habits;
-    private Habit habit;
+    private ArrayList<Completion> completions;
 
-    public CompletionAdapter(Context context, int resource, ArrayList<Habit> habits) {
+    public CompletionAdapter(Context context, int resource, ArrayList<Completion> completions) {
         super(context, resource);
         this.context = context;
         this.layoutResourceId = resource;
-        this.habits = habits;
+        this.completions = completions;
     }
 
     @Override
@@ -40,7 +39,7 @@ public class CompletionAdapter extends ArrayAdapter<Habit> {
         row = inflater.inflate(layoutResourceId, parent, false);
 
         HabitItemHolder holder = new HabitItemHolder();
-        holder.habit = this.habits.get(position);
+        holder.completion = this.completions.get(position);
         holder.titleText = (TextView) row.findViewById(R.id.main_title);
         holder.captionText = (TextView) row.findViewById(R.id.caption_text);
         holder.incButton = (Button) row.findViewById(R.id.increment_list_button);
@@ -49,8 +48,8 @@ public class CompletionAdapter extends ArrayAdapter<Habit> {
         holder.incButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                habits.get(position).incrementTodaysHabit();
-                HabitSingleton.getInstance().saveHabits();
+                completions.get(position).increment();
+                HabitSingleton.getInstance().updateCompletions(completions);
                 notifyDataSetChanged();
             }
         });
@@ -58,8 +57,8 @@ public class CompletionAdapter extends ArrayAdapter<Habit> {
         holder.decButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                habits.get(position).decrementTodaysHabit();
-                HabitSingleton.getInstance().saveHabits();
+                completions.get(position).decrement();
+                HabitSingleton.getInstance().updateCompletions(completions);
                 notifyDataSetChanged();
             }
         });
@@ -70,12 +69,12 @@ public class CompletionAdapter extends ArrayAdapter<Habit> {
     }
 
     private void setupHabitItem(HabitItemHolder holder) {
-        holder.titleText.setText(holder.habit.getName());
-        holder.captionText.setText("Todays Completions:" + holder.habit.getTodaysCount());
+        holder.titleText.setText(holder.completion.getDateString());
+        holder.captionText.setText("Completions:" + holder.completion.getCompletions());
     }
 
     public static class HabitItemHolder {
-        Habit       habit;
+        Completion  completion;
         TextView    titleText;
         TextView    captionText;
         Button      incButton;

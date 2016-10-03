@@ -9,42 +9,39 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class InspectHabitView extends Activity {
 
-    private ListView customHabitListView;
+    private ListView completionListView;
     private TextView headerTitleText;
 
     private Button addHabitButton;
+    private Habit thisHabit;
+    private ArrayList<Completion> completions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_all_habits);
 
-
-        customHabitListView = (ListView) findViewById(android.R.id.list);
+//        loadHabitFromIntent();
+        completionListView = (ListView) findViewById(android.R.id.list);
 
         configureHeader();
         HabitSingleton.getInstance().setMainContext(getApplicationContext());
-
-
-        customHabitListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(), AddHabitActivity.class);
-                intent.putExtra("habit_index", position);
-                startActivityForResult(intent, 0);
-            }
-        });
 
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        CustomAdapter adapter = new CustomAdapter(this, R.layout.custom_listitem_view, HabitSingleton.getInstance().getHabitList());
-        adapter.addAll(HabitSingleton.getInstance().getHabitList());
-        customHabitListView.setAdapter(adapter);
+        ArrayList<Completion> comp = HabitSingleton.getInstance().getCurrentHabit().getCompletionList();
+//        comp.add(new  Completion("Date Here", 1));
+
+        CompletionAdapter adapter = new CompletionAdapter(this, R.layout.custom_listitem_view, comp);
+        adapter.addAll(comp);
+        completionListView.setAdapter(adapter);
     }
 
     public void configureHeader() {
@@ -53,6 +50,14 @@ public class InspectHabitView extends Activity {
 
         addHabitButton = (Button) findViewById(R.id.add_habit_button);
         addHabitButton.setVisibility(View.GONE);
+    }
+
+    private void loadHabitFromIntent() {
+        Intent intent = getIntent();
+        if (intent.hasExtra("habit")) {
+            thisHabit = (Habit) intent.getSerializableExtra("habit");
+            completions = thisHabit.getCompletionList();
+        }
     }
 
 }
