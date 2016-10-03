@@ -1,29 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="50dp">
-
-    <TextView
-        android:text="TextView"
-        android:layout_width="match_parent"
-        android:id="@+id/main_title"
-        android:layout_height="match_parent" />
-
-    <TextView
-        android:text="TextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/caption_text" />
 
     <Button
         android:text="+"
-        android:layout_width="match_parent"
+        android:id="@+id/increment_list_button"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:autoText="true"
+        android:layout_toEndOf="@+id/decrement_list_button"
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:focusable="false"/>
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="312dp"
         android:layout_height="wrap_content"
-        android:id="@+id/increment_list_button" />
+        android:id="@+id/caption_text"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/main_title"
+        android:layout_alignEnd="@+id/main_title"
+        android:paddingBottom="5dp"
+        android:paddingLeft="15dp"
+        android:textSize="10sp"
+        android:focusable="false"/>
+
+    <TextView
+        android:text="TextView"
+        android:id="@+id/main_title"
+        android:layout_height="31dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_width="250dp"
+        android:paddingTop="5dp"
+        android:paddingLeft="15dp"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:focusable="false"/>
 
     <Button
         android:text="-"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/decrement_list_button" />
-</LinearLayout>
+        android:id="@+id/decrement_list_button"
+        android:layout_height="match_parent"
+        android:layout_width="40dp"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/caption_text"
+        android:focusable="false"/>
+</RelativeLayout>

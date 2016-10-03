@@ -33,6 +33,7 @@ import java.util.Iterator;
 public class HabitSingleton {
     private static String FILENAME = "habits.sav";
     private static HabitSingleton ourInstance = new HabitSingleton();
+    private Context mainContext;
     private ArrayList<Habit> habitList = new ArrayList<Habit>();
     public static HabitSingleton getInstance() {
         return ourInstance;
@@ -48,6 +49,16 @@ public class HabitSingleton {
     public void removeHabit(Habit habit, Context context) {
         this.habitList.remove(habit);
         saveHabits(context);
+    }
+
+    public void setMainContext(Context context) {
+        this.mainContext = context;
+    }
+
+    public void saveHabits(){
+        if (mainContext != null) {
+            this.saveHabits(mainContext);
+        }
     }
 
     public ArrayList<Habit> getHabitList() {
@@ -83,11 +94,12 @@ public class HabitSingleton {
     public void loadHabits(Context context) {
         try {
             FileInputStream fis = context.openFileInput(FILENAME);
-            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fis));
 
             // Code from http://stackoverflow.com/questions/12384064/gson-convert-from-json-to-a-typed-arraylistt
             Type listType = new TypeToken<ArrayList<Habit>>(){}.getType();
-            habitList = new Gson().fromJson(in,listType);
+            Gson gson = new Gson();
+            habitList = gson.fromJson(bufferedReader,listType);
 
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block

@@ -2,18 +2,15 @@ package uofa.assignment1habittracker;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 /**
  * Created by drei on 2016-10-02.
@@ -22,12 +19,13 @@ import java.util.Calendar;
 /*
 https://looksok.wordpress.com/tag/listview-item-with-button/
  */
-public class CustomAdapter extends ArrayAdapter<Habit> {
+public class CompletionAdapter extends ArrayAdapter<Habit> {
     private int layoutResourceId;
     private Context context;
     private ArrayList<Habit> habits;
+    private Habit habit;
 
-    public CustomAdapter(Context context, int resource, ArrayList<Habit> habits) {
+    public CompletionAdapter(Context context, int resource, ArrayList<Habit> habits) {
         super(context, resource);
         this.context = context;
         this.layoutResourceId = resource;
