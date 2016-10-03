@@ -2,6 +2,7 @@ package uofa.assignment1habittracker;
 
 import android.widget.DatePicker;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -10,7 +11,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 
-public class Habit {
+public class Habit implements Serializable{
     private String name;
     private Date startDate;
     private Map<Integer, Boolean> weeklyCompletionList = new HashMap<Integer, Boolean>();
@@ -102,13 +103,13 @@ public class Habit {
         return this.startDate;
     }
 
-    public int getTodaysCount() {
+    public String getTodaysCount() {
         Calendar cal = Calendar.getInstance();
-        int today = cal.getInstance().get(Calendar.DAY_OF_WEEK);
-        if (habitList.containsKey(today)) {
-            return habitList.get(today);
+        int weekday = cal.getInstance().get(Calendar.DAY_OF_WEEK);
+        if (habitList.containsKey(getToday())) {
+            return Integer.toString(habitList.get(weekday));
         } else  {
-            return 0;
+            return "0";
         }
     }
 
@@ -125,6 +126,10 @@ public class Habit {
         }
     }
 
+    public void incrementTodaysHabit() {
+        incrementDayHabit(getToday());
+    }
+
     public void decrementDayHabit(Date date) {
         if (habitList.containsKey(date)) {
             if (habitList.get(date) == 1) {
@@ -134,6 +139,10 @@ public class Habit {
                 habitList.put(date, habitList.get(date) - 1);
             }
         }
+    }
+
+    public void decrementTodaysHabit() {
+        decrementDayHabit(getToday());
     }
 
     public Map<Date, Integer> getHabitList() {
@@ -151,6 +160,9 @@ public class Habit {
         return cal.getTime();
     }
 
+    private Date getToday() {
+        return new Date();
+    }
     // ===============================================
 
 }

@@ -10,13 +10,11 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.Calendar;
-
 
 public class MainScreen extends Activity {
 
-    private ListView habitListView;
-
+//    private ListView habitListView;
+    private ListView customHabitListView;
     private TextView headerTitleText;
 
     private Button addHabitButton;
@@ -27,7 +25,8 @@ public class MainScreen extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
 
-        habitListView = (ListView) findViewById(android.R.id.list);
+//        habitListView = (ListView) findViewById(android.R.id.list);
+        customHabitListView = (ListView) findViewById(android.R.id.list);
 
         configureHeader();
         HabitSingleton.getInstance().loadHabits(getApplicationContext());
@@ -39,7 +38,7 @@ public class MainScreen extends Activity {
             }
         });
 
-        habitListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        customHabitListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getApplicationContext(), AddHabitActivity.class);
@@ -52,8 +51,11 @@ public class MainScreen extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
-        habitArrayAdapter = new ArrayAdapter<Habit>(this, R.layout.list_textview, HabitSingleton.getInstance().getTodaysHabits());
-        habitListView.setAdapter(habitArrayAdapter);
+        CustomAdapter adapter = new CustomAdapter(this, R.layout.custom_listitem_view);
+        adapter.addAll(HabitSingleton.getInstance().getTodaysHabits());
+        customHabitListView.setAdapter(adapter);
+//        habitArrayAdapter = new ArrayAdapter<Habit>(this, R.layout.list_textview, HabitSingleton.getInstance().getTodaysHabits());
+//        habitListView.setAdapter(habitArrayAdapter);
     }
 
     public void configureHeader() {
