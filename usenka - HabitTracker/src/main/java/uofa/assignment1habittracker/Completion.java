@@ -1,17 +1,18 @@
 package uofa.assignment1habittracker;
 
-/**
- * Created by drei on 2016-10-03.
+/*
+    Completion Class:
+    - Used to make a list of Completions
+    - Used mostly to manage the completion Activity so that it is easier to set up an Adapter.
+    - Contains:
+        - String dateString
+        - Integer completions
+
  */
 
 public class Completion {
     private String dateString;
     private Integer completions;
-
-    public Completion(String dateString) {
-        this.dateString = dateString;
-        this.completions = 0;
-    }
 
     public Completion(String dateString, Integer completions) {
         this.dateString = dateString;

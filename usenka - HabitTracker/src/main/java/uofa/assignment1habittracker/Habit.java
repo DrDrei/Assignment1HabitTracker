@@ -12,8 +12,15 @@ import java.util.Iterator;
 import java.util.Map;
 
 /*
-    Habit Class
-    -
+    Habit Class --- Contains:
+        - habit name
+        - habit date as a string
+        - a map of the weekdays when habit is supposed to be completed
+        - a map of completions mapped dateSting to integer
+        - a list of completions
+        - lots of getters and setters as well as helper functions.
+    Note: Habit does not store zero completion days. If there is a zero completion day the array
+    does not store that.
  */
 
 
@@ -24,13 +31,14 @@ public class Habit {
     private Map<String, Integer> habitList = new HashMap<String, Integer>();
     private ArrayList<Completion> completions = new ArrayList<Completion>();
 
+
+    // ==========       Initialization      ==========
+
     private void daysOfWeekInitFalse() {
         for (DaysOfWeek day: DaysOfWeek.values()) {
             weeklyCompletionList.put(day.getDay(), false);
         }
     }
-
-    // ==========       Initialization      ==========
 
     public Habit(String name, ArrayList<DaysOfWeek> wantedCompletionList, DatePicker datePicker){
         this.name = name;
@@ -38,10 +46,15 @@ public class Habit {
         setWeeklyCompletion(wantedCompletionList);
     }
 
+    public String toString() {
+        return this.name;
+    }
+
     // ===============================================
 
 
     // ==========       Getters/Setters     ==========
+
     public void setDayOfWeek(DaysOfWeek day) {
         weeklyCompletionList.put(day.getDay(), true);
     }
@@ -55,22 +68,16 @@ public class Habit {
         }
     }
 
-    public boolean getWeeklyDay(Integer day) {
-        return weeklyCompletionList.get(day);
-    }
-
     public void setName(String name) {
         this.name = name;
     }
 
-    public String getName() {
-        return this.name;
+    public boolean getWeeklyDay(Integer day) {
+        return weeklyCompletionList.get(day);
     }
 
-    public void updateHabit(String name, ArrayList<DaysOfWeek> wantedCompletionList, DatePicker datePicker) {
-        this.name = name;
-        this.startDate = getDateFromPicker(datePicker);
-        setWeeklyCompletion(wantedCompletionList);
+    public String getName() {
+        return this.name;
     }
 
     public Date getStartDate() {
@@ -90,15 +97,20 @@ public class Habit {
         }
     }
 
-    private void updateCompletionList() {
-        this.completions.clear();
-        Iterator iter = habitList.keySet().iterator();
-        while (iter.hasNext()) {
-            String dateString = (String) iter.next();
-            Integer completions = habitList.get(dateString);
-            Completion completion = new Completion(dateString, completions);
-            this.completions.add(completion);
-        }
+    public ArrayList<Completion> getCompletionList() {
+        return completions;
+    }
+
+
+    // ===============================================
+
+
+    // ==========     Special Functions     ==========
+
+    public void updateHabit(String name, ArrayList<DaysOfWeek> wantedCompletionList, DatePicker datePicker) {
+        this.name = name;
+        this.startDate = getDateFromPicker(datePicker);
+        setWeeklyCompletion(wantedCompletionList);
     }
 
     public void overwriteCompletionList(ArrayList<Completion> completions) {
@@ -109,7 +121,7 @@ public class Habit {
     // ===============================================
 
 
-    // ==========       Helper Funcitons    ==========
+    // ==========       Helper Functions    ==========
 
     public void incrementDayHabit(String date) {
         if (!habitList.containsKey(date)) {
@@ -139,19 +151,20 @@ public class Habit {
         decrementDayHabit(getToday());
     }
 
-    public ArrayList<Completion> getCompletionList() {
-        return completions;
-    }
+    // ===============================================
 
-    public String toString() {
-        return this.name;
-    }
 
-    private String getDateFromPicker(DatePicker datePicker) {
-        Calendar cal = Calendar.getInstance();
-        cal.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
-        cal.get(Calendar.DAY_OF_WEEK);
-        return getStringFromDate(cal.getTime());
+    // ==========  Private Helper Functions ==========
+
+    private void updateCompletionList() {
+        this.completions.clear();
+        Iterator iter = habitList.keySet().iterator();
+        while (iter.hasNext()) {
+            String dateString = (String) iter.next();
+            Integer completions = habitList.get(dateString);
+            Completion completion = new Completion(dateString, completions);
+            this.completions.add(completion);
+        }
     }
 
     private String getToday() {
@@ -168,6 +181,14 @@ public class Habit {
         Date date = dateFormatter.parse(dateString);
         return date;
     }
+
+    private String getDateFromPicker(DatePicker datePicker) {
+        Calendar cal = Calendar.getInstance();
+        cal.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
+        cal.get(Calendar.DAY_OF_WEEK);
+        return getStringFromDate(cal.getTime());
+    }
+
     // ===============================================
 
 }

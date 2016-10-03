@@ -5,11 +5,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+/*
+    MainScreen is the activity that is presented on app start.
+    - Links to the activity for creating a new habit
+    - Links to the activity for viewing all habits, not just todays
+    - Links to editing a selected habit
+    - Allows incrementing of completions.
+ */
 
 public class MainScreen extends Activity {
     private ListView customHabitListView;

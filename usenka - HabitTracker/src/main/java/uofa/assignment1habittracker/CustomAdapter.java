@@ -20,7 +20,10 @@ import java.util.Calendar;
  */
 
 /*
-https://looksok.wordpress.com/tag/listview-item-with-button/
+    References:
+    - https://looksok.wordpress.com/tag/listview-item-with-button/
+    CustomAdapter is an adapter to list the habit name, completions, and inc/dec buttons
+    Simple adapter, not much to say
  */
 public class CustomAdapter extends ArrayAdapter<Habit> {
     private int layoutResourceId;

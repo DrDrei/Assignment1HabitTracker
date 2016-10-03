@@ -12,9 +12,15 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+/*
+    AddHabitActivity is an activity for the adding of Habits
+    - Sets up a new habit, give the habit a new title, weeklycompletions, and date
+    - Adds the new habit to the Singleton if saved.
+    - Also provides the option of deleting a habit if called and has intent.
+    - Also provides the option of checking Completions for habit if called and has intent.
+ */
 
 public class AddHabitActivity extends Activity {
-
     private CheckBox checkMon, checkTue, checkWed, checkThu, checkFri, checkSat, checkSun;
     private DatePicker datePicker;
     private EditText habitNameText;
@@ -77,6 +83,7 @@ public class AddHabitActivity extends Activity {
         super.onStart();
     }
 
+    // Configures the app header.
     public void configureHeader() {
         headerTitleText = (TextView) findViewById(R.id.header_title_text);
         headerTitleText.setText("Add a Habit");

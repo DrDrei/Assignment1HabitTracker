@@ -1,5 +1,8 @@
 package uofa.assignment1habittracker;
 
+/*
+    DaysOfWeek is an enum for static variables and ids in the program
+ */
 public enum DaysOfWeek {
     Sunday      (1, R.id.add_sunday),
     Monday      (2, R.id.add_monday),

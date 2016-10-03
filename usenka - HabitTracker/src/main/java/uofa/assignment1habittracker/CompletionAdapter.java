@@ -17,7 +17,9 @@ import java.util.ArrayList;
  */
 
 /*
-https://looksok.wordpress.com/tag/listview-item-with-button/
+    References:
+    - https://looksok.wordpress.com/tag/listview-item-with-button/
+    CompletionAdapter is an adapter to list the Date, # of completions, and inc/dec buttons
  */
 public class CompletionAdapter extends ArrayAdapter<Completion> {
     private int layoutResourceId;

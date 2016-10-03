@@ -28,6 +28,15 @@ import java.util.Iterator;
     References:
     - https://www.mkyong.com/java/how-do-convert-java-object-to-from-json-format-gson-api/
     - In class LonelyTwitter app.
+
+    HabitSingleton is a class that deals with provides a single instance of an array of habits
+    for the program so there is no syncing issues
+    - Store a habit array, filename where to store data, Context for ease of saving/loading, and a
+        currentHabit for the completion Activity.
+    - Allows saving/loading of habits array
+    - Allows removing and adding of habits to habits array
+    - Provides a general list of a today-only list.
+    - Has some other helper methods and getters/setters
  */
 
 public class HabitSingleton {
@@ -88,10 +97,6 @@ public class HabitSingleton {
         return getTodaysHabits().get(position);
     }
 
-    public Habit getHabitAtIndex(int position) {
-        return habitList.get(position);
-    }
-
     public void loadHabits(Context context) {
         try {
             FileInputStream fis = context.openFileInput(FILENAME);
@@ -131,6 +136,7 @@ public class HabitSingleton {
     public void setCurrentHabit(Habit habit) {
         this.currentHabit = habit;
     }
+
     public Habit getCurrentHabit() {
         return this.currentHabit;
     }
@@ -141,6 +147,4 @@ public class HabitSingleton {
         habitList.set(pos, currentHabit);
         saveHabits();
     }
-
-
 }
