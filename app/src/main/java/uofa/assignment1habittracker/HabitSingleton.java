@@ -83,11 +83,12 @@ public class HabitSingleton {
     public void loadHabits(Context context) {
         try {
             FileInputStream fis = context.openFileInput(FILENAME);
-            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fis));
 
             // Code from http://stackoverflow.com/questions/12384064/gson-convert-from-json-to-a-typed-arraylistt
             Type listType = new TypeToken<ArrayList<Habit>>(){}.getType();
-            habitList = new Gson().fromJson(in,listType);
+            Gson gson = new Gson();
+            habitList = gson.fromJson(bufferedReader,listType);
 
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
