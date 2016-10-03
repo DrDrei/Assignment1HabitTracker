@@ -12,15 +12,12 @@ import android.widget.TextView;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-/**
- * Created by drei on 2016-10-02.
- */
-
 /*
     References:
     - https://looksok.wordpress.com/tag/listview-item-with-button/
     CompletionAdapter is an adapter to list the Date, # of completions, and inc/dec buttons
  */
+
 public class CompletionAdapter extends ArrayAdapter<Completion> {
     private int layoutResourceId;
     private Context context;

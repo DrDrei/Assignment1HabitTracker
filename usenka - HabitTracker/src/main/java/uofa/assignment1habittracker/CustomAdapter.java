@@ -15,10 +15,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-/**
- * Created by drei on 2016-10-02.
- */
-
 /*
     References:
     - https://looksok.wordpress.com/tag/listview-item-with-button/

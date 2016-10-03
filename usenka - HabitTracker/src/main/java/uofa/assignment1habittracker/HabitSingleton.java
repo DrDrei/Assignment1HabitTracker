@@ -20,10 +20,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 
-/**
- * Created by drei on 2016-09-30.
- */
-
 /*
     References:
     - https://www.mkyong.com/java/how-do-convert-java-object-to-from-json-format-gson-api/
@@ -73,18 +69,6 @@ public class HabitSingleton {
 
     public ArrayList<Habit> getHabitList() {
         return this.habitList;
-    }
-
-    public ArrayList<Habit> getHabitListOnDay(Integer day) {
-        ArrayList<Habit> dayHabitList = new ArrayList<Habit>();
-        Iterator iter = habitList.iterator();
-        while (iter.hasNext()) {
-            Habit habit = (Habit) iter.next();
-            if (habit.getWeeklyDay(day)) {
-                dayHabitList.add(habit);
-            }
-        }
-        return dayHabitList;
     }
 
     public ArrayList<Habit> getTodaysHabits() {
@@ -146,5 +130,17 @@ public class HabitSingleton {
         int pos = habitList.indexOf(currentHabit);
         habitList.set(pos, currentHabit);
         saveHabits();
+    }
+
+    private ArrayList<Habit> getHabitListOnDay(Integer day) {
+        ArrayList<Habit> dayHabitList = new ArrayList<Habit>();
+        Iterator iter = habitList.iterator();
+        while (iter.hasNext()) {
+            Habit habit = (Habit) iter.next();
+            if (habit.getWeeklyDay(day)) {
+                dayHabitList.add(habit);
+            }
+        }
+        return dayHabitList;
     }
 }

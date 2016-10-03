@@ -23,7 +23,6 @@ import java.util.Map;
     does not store that.
  */
 
-
 public class Habit {
     private String name;
     private String startDate;

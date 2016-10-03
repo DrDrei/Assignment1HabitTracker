@@ -14,6 +14,7 @@ import android.widget.TextView;
     - simple activity that links to habit being able to be edited.
     - allows incrementing habits even on days that habit is not scheduled for.
  */
+
 public class ViewAllHabits extends Activity {
     private ListView customHabitListView;
     private TextView headerTitleText;

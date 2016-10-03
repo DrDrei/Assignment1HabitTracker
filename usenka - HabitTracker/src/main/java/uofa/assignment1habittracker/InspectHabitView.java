@@ -14,6 +14,7 @@ import java.util.ArrayList;
     - simply shows the dates and completions for habits that has any completions
 
  */
+
 public class InspectHabitView extends Activity {
 
     private ListView completionListView;
