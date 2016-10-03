@@ -1,10 +1,6 @@
 package uofa.assignment1habittracker;
 
-import android.text.format.DateUtils;
 import android.widget.DatePicker;
-
-import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,10 +10,14 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Objects;
+
+/*
+    Habit Class
+    -
+ */
 
 
-public class Habit implements Serializable {
+public class Habit {
     private String name;
     private String startDate;
     private Map<Integer, Boolean> weeklyCompletionList = new HashMap<Integer, Boolean>();
@@ -31,17 +31,6 @@ public class Habit implements Serializable {
     }
 
     // ==========       Initialization      ==========
-    public Habit(String name) {
-        this.name = name;
-        this.daysOfWeekInitFalse();
-        this.startDate = getToday();
-    }
-
-    public Habit(String name, ArrayList<DaysOfWeek> wantedCompletionList) {
-        this.name = name;
-        this.startDate = getToday();
-        setWeeklyCompletion(wantedCompletionList);
-    }
 
     public Habit(String name, ArrayList<DaysOfWeek> wantedCompletionList, DatePicker datePicker){
         this.name = name;
@@ -57,11 +46,6 @@ public class Habit implements Serializable {
         weeklyCompletionList.put(day.getDay(), true);
     }
 
-    public void unsetDayOfWeek(DaysOfWeek day) {
-        weeklyCompletionList.put(day.getDay(), false);
-
-    }
-
     public void setWeeklyCompletion(ArrayList<DaysOfWeek> wantedCompletionList) {
         Iterator iter = wantedCompletionList.iterator();
         daysOfWeekInitFalse();
@@ -69,23 +53,6 @@ public class Habit implements Serializable {
             DaysOfWeek day = (DaysOfWeek) iter.next();
             setDayOfWeek(day);
         }
-    }
-
-    public int getCount(Date date) {
-        if (this.habitList.get(date) != null) {
-            return this.habitList.get(date);
-        } else {
-            return 0;
-        }
-
-    }
-
-    public int getDateCount() {
-        return  this.habitList.size();
-    }
-
-    public Iterator getWeeklyCompletionIterator() {
-        return this.weeklyCompletionList.values().iterator();
     }
 
     public boolean getWeeklyDay(Integer day) {
@@ -116,8 +83,6 @@ public class Habit implements Serializable {
     }
 
     public String getTodaysCount() {
-//        Calendar cal = Calendar.getInstance();
-//        int weekday = cal.getInstance().get(Calendar.DAY_OF_WEEK);
         if (habitList.containsKey(getToday())) {
             return Integer.toString(habitList.get(getToday()));
         } else  {
@@ -134,10 +99,6 @@ public class Habit implements Serializable {
             Completion completion = new Completion(dateString, completions);
             this.completions.add(completion);
         }
-    }
-
-    public void setCompletions(Integer completions) {
-
     }
 
     public void overwriteCompletionList(ArrayList<Completion> completions) {
